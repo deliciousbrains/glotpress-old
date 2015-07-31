@@ -13,4 +13,12 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-require_once( dirname( __FILE__ ) . '/gp-load.php' );
+define( 'GP_PATH', dirname( __FILE__ ) . '/' );
+define( 'GP_INC', 'gp-includes/' );
+
+require_once( GP_PATH . 'gp-settings.php' );
+
+function gp_rewrite_rules() {
+    add_rewrite_rule( 'projects/?$', 'index.php?gp_action=projects', 'top' );
+}
+add_action( 'init', 'gp_rewrite_rules' );
