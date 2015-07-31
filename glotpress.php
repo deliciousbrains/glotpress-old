@@ -4,7 +4,7 @@
  * Plugin Name:       GlotPress
  * Plugin URI:        https://github.com/deliciousbrains/glotpress
  * Description:       GlotPress is a collaborative, web-based software translation tool.
- * Version:           1.0.0
+ * Version:           0.1
  * Author:            GlotPress Community
  * Author URI:        https://github.com/deliciousbrains/glotpress
  * License:           GPL-2.0+
@@ -52,7 +52,7 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-glotpress.php';
  * then kicking off the plugin from this point in the file does
  * not affect the page life cycle.
  *
- * @since    1.0.0
+ * @since    0.1
  */
 function run_glotpress() {
 
