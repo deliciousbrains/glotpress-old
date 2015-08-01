@@ -86,7 +86,7 @@ class GlotPress_Public {
 		$action = get_query_var( 'gp_action' );
 
 		if ( 'projects' === $action ) {
-			$template = dirname( __FILE__ ) . '/partials/projects.php';
+			$template = dirname( __FILE__ ) . '/templates/projects.php';
 		}
 
 		return $template;
