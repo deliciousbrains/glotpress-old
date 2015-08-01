@@ -63,4 +63,17 @@ class GlotPress_Public {
 		add_rewrite_rule( '/glotpress/?$', 'index.php?gp_action=projects', 'top' );
 	}
 
+	/**
+	 * Query vars
+	 *
+	 * @param array $vars
+	 *
+	 * @return array
+	 */
+	public function query_vars( $vars ) {
+		$vars[] = 'gp_action';
+
+		return $vars;
+	}
+
 }
