@@ -118,8 +118,12 @@ class GlotPress {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-glotpress-public.php';
 
-		$this->loader = new GlotPress_Loader();
+		/**
+		 * Template functions
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/functions-template.php';
 
+		$this->loader = new GlotPress_Loader();
 	}
 
 	/**

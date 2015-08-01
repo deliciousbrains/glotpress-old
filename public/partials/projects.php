@@ -1,3 +1,5 @@
-<?php
+<?php gp_get_header(); ?>
 
-echo 'GlotPress';
+	<h1>GlotPress</h1>
+
+<?php gp_get_footer(); ?>
