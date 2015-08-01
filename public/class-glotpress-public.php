@@ -51,6 +51,20 @@ class GlotPress_Public {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 
+		$this->load_dependencies();
+	}
+
+	/**
+	 * Load the required dependencies
+	 *
+	 * @since    0.1
+	 * @access   private
+	 */
+	private function load_dependencies() {
+		/**
+		 * Template functions
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/functions-template.php';
 	}
 
 	/**
