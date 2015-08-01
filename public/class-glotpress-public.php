@@ -59,7 +59,7 @@ class GlotPress_Public {
 	 * @since    0.1
 	 */
 	public function rewrite_rules() {
-		add_rewrite_rule( '/glotpress/?$', 'index.php?gp_action=projects', 'top' );
+		add_rewrite_rule( 'glotpress/?$', 'index.php?gp_action=projects', 'top' );
 	}
 
 	/**
@@ -73,6 +73,23 @@ class GlotPress_Public {
 		$vars[] = 'gp_action';
 
 		return $vars;
+	}
+
+	/**
+	 * Template include
+	 *
+	 * @param string $template
+	 *
+	 * @return string
+	 */
+	public function template_include( $template ) {
+		$action = get_query_var( 'gp_action' );
+
+		if ( 'projects' === $action ) {
+			$template = dirname( __FILE__ ) . '/partials/projects.php';
+		}
+
+		return $template;
 	}
 
 }

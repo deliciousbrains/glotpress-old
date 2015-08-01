@@ -165,6 +165,7 @@ class GlotPress {
 
 		// Filters
 		$this->loader->add_filter( 'query_vars', $plugin_public, 'query_vars' );
+		$this->loader->add_filter( 'template_include', $plugin_public, 'template_include' );
 	}
 
 	/**
