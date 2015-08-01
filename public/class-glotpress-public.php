@@ -55,49 +55,12 @@ class GlotPress_Public {
 	}
 
 	/**
-	 * Register the stylesheets for the public-facing side of the site.
+	 * Rewrite rules
 	 *
 	 * @since    0.1
 	 */
-	public function enqueue_styles() {
-
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in GlotPress_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The GlotPress_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/glotpress-public.css', array(), $this->version, 'all' );
-
-	}
-
-	/**
-	 * Register the stylesheets for the public-facing side of the site.
-	 *
-	 * @since    0.1
-	 */
-	public function enqueue_scripts() {
-
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in GlotPress_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The GlotPress_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/glotpress-public.js', array( 'jquery' ), $this->version, false );
-
+	public function rewrite_rules() {
+		add_rewrite_rule( '/projects/?$', 'index.php?gp_action=projects', 'top' );
 	}
 
 }
