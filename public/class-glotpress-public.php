@@ -60,7 +60,7 @@ class GlotPress_Public {
 	 * @since    0.1
 	 */
 	public function rewrite_rules() {
-		add_rewrite_rule( '/projects/?$', 'index.php?gp_action=projects', 'top' );
+		add_rewrite_rule( '/glotpress/?$', 'index.php?gp_action=projects', 'top' );
 	}
 
 }
