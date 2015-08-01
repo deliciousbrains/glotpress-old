@@ -67,7 +67,6 @@ class GlotPress {
 	 * @since    0.1
 	 */
 	public function __construct() {
-
 		$this->plugin_name = 'glotpress';
 		$this->version = '0.1';
 
@@ -133,7 +132,6 @@ class GlotPress {
 	 * @access   private
 	 */
 	private function set_locale() {
-
 		$plugin_i18n = new GlotPress_i18n();
 		$plugin_i18n->set_domain( $this->get_plugin_name() );
 
@@ -149,12 +147,7 @@ class GlotPress {
 	 * @access   private
 	 */
 	private function define_admin_hooks() {
-
-		$plugin_admin = new GlotPress_Admin( $this->get_plugin_name(), $this->get_version() );
-
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-
+		//
 	}
 
 	/**
