@@ -161,14 +161,12 @@ class GlotPress {
 	 * @access   private
 	 */
 	private function define_public_hooks() {
-		$plugin_public = new GlotPress_Public( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public = new GlotPress_Public();
 
 		// Actions
-		$this->loader->add_action( 'init', $plugin_public, 'rewrite_rules' );
+		$this->loader->add_action( 'init', $plugin_public, 'router' );
 
 		// Filters
-		$this->loader->add_filter( 'query_vars', $plugin_public, 'query_vars' );
-		$this->loader->add_filter( 'template_include', $plugin_public, 'template_include' );
 	}
 
 	/**

@@ -23,87 +23,82 @@
 class GlotPress_Public {
 
 	/**
-	 * The ID of this plugin.
+	 * The router
 	 *
 	 * @since    0.1
-	 * @access   private
-	 * @var      string    $plugin_name    The ID of this plugin.
+	 * @access   protected
+	 * @var      object $router The router
 	 */
-	private $plugin_name;
-
-	/**
-	 * The version of this plugin.
-	 *
-	 * @since    0.1
-	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
-	 */
-	private $version;
+	protected $router;
 
 	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    0.1
-	 * @param      string    $plugin_name       The name of the plugin.
-	 * @param      string    $version    The version of this plugin.
+	 *
+	 * @param      string $plugin_name The name of the plugin.
+	 * @param      string $version The version of this plugin.
 	 */
-	public function __construct( $plugin_name, $version ) {
-		$this->plugin_name = $plugin_name;
-		$this->version = $version;
-
-		$this->load_dependencies();
+	public function __construct() {
+		$this->router = new GlotPress_Router();
 	}
 
-	/**
-	 * Load the required dependencies
-	 *
-	 * @since    0.1
-	 * @access   private
+	/*
+	 * Handle routes
 	 */
-	private function load_dependencies() {
-		/**
-		 * Template functions
-		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/functions-template.php';
-	}
+	public function router() {
+		$routes_dir = plugin_dir_path( dirname( __FILE__ ) ) . 'routes/';
 
-	/**
-	 * Rewrite rules
-	 *
-	 * @since    0.1
-	 */
-	public function rewrite_rules() {
-		add_rewrite_rule( 'glotpress/?$', 'index.php?gp_action=projects', 'top' );
-	}
+		$routes = $this->default_routes();
+		foreach ( $routes as $pattern => $route ) {
+			$http_method = isset( $route[0] ) ? strtoupper( $route[0] ) : 'GET';
+			$file_name   = isset( $route[1] ) ? $route[1] : '';
+			$method_name = isset( $route[2] ) ? $route[2] : '';
 
-	/**
-	 * Query vars
-	 *
-	 * @param array $vars
-	 *
-	 * @return array
-	 */
-	public function query_vars( $vars ) {
-		$vars[] = 'gp_action';
+			if ( ! $file_name ) {
+				continue;
+			}
 
-		return $vars;
-	}
+			if ( file_exists( $routes_dir . $file_name . '.php' ) ) {
+				require_once $routes_dir . $file_name . '.php';
+			}
 
-	/**
-	 * Template include
-	 *
-	 * @param string $template
-	 *
-	 * @return string
-	 */
-	public function template_include( $template ) {
-		$action = get_query_var( 'gp_action' );
+			$class_name = $this->file_name_to_class_name( $file_name );
 
-		if ( 'projects' === $action ) {
-			$template = dirname( __FILE__ ) . '/templates/projects.php';
+			if ( method_exists( $class_name, $method_name ) ) {
+				if ( $pattern === '/' ) {
+					$pattern = '';
+				}
+
+				$this->router->match( $http_method, untrailingslashit( 'glotpress/' . $pattern ), array(
+					new $class_name,
+					$method_name
+				) );
+			}
 		}
 
-		return $template;
+		$this->router->run();
+	}
+
+	/**
+	 * Define the default routes
+	 *
+	 * @return mixed|void
+	 */
+	private function default_routes() {
+		return apply_filters( 'glotpress_routes', array(
+			'/'        => array( 'get', 'route-index', 'index' ),
+			'projects' => array( 'get', 'route-project', 'index' ),
+		) );
+	}
+
+	/*
+	 * Convert file name to class name
+	 */
+	private function file_name_to_class_name( $filename ) {
+		$parts = explode( '-', $filename );
+
+		return 'GP_' . ucwords( implode( '_', $parts ), '_' );
 	}
 
 }
