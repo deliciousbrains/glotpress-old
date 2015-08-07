@@ -26,6 +26,8 @@ class GP_Base_Route {
 	 */
 	public function __construct() {
 		add_filter( 'template_include', array( $this, 'glotpress_template' ) );
+		add_action( 'wp_print_styles', array( $this, 'enqueue_glotpress_styles' ), 99 );
+		add_action( 'wp_print_scripts', array( $this, 'enqueue_glotpress_scripts' ), 99 );
 
 		$this->load_dependencies();
 	}
@@ -41,6 +43,38 @@ class GP_Base_Route {
 		 * Template functions
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/functions-template.php';
+	}
+
+	/**
+	 * Enqueue the styles for GlotPress
+	 */
+	public function enqueue_glotpress_styles() {
+		global $wp_scripts;
+
+		// Dequeue any enqueued styles from WordPress
+		/*if ( ! empty( $wp_scripts->queue ) ) {
+			foreach ( $wp_scripts->queue as $handle ) {
+				wp_dequeue_style( $handle );
+			}
+		}*/
+
+		wp_enqueue_style( 'glotpress-base', plugin_dir_url( dirname( __FILE__ ) ) . 'public/assets/css/style.css', array(), GLOTPRESS_VERSION );
+	}
+
+	/**
+	 * Enqueue the scripts for GlotPress
+	 */
+	public function enqueue_glotpress_scripts() {
+		global $wp_scripts;
+
+		// Dequeue any enqueued scripts from WordPress
+		/*if ( ! empty( $wp_scripts->queue ) ) {
+			foreach ( $wp_scripts->queue as $handle ) {
+				wp_dequeue_script( $handle );
+			}
+		}*/
+
+		wp_enqueue_script( 'jquery' );
 	}
 
 	/*
