@@ -11,7 +11,7 @@
 class GP_Route_Index extends GP_Base_Route {
 
 	public function index() {
-		wp_redirect( home_url( 'glotpress/projects' ) );
+		wp_redirect( gp_url( 'projects' ) );
 	}
 
 }
