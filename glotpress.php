@@ -18,6 +18,9 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
+define( 'GLOTPRESS_VERSION', '0.1' );
+define( 'GLOTPRESS_URL_BASE', 'glotpress' );
+
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-glotpress-activator.php

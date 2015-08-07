@@ -68,7 +68,7 @@ class GlotPress {
 	 */
 	public function __construct() {
 		$this->plugin_name = 'glotpress';
-		$this->version = '0.1';
+		$this->version = GLOTPRESS_VERSION;
 
 		$this->load_dependencies();
 		$this->set_locale();

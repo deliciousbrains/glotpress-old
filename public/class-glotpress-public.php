@@ -70,7 +70,7 @@ class GlotPress_Public {
 					$pattern = '';
 				}
 
-				$this->router->match( $http_method, untrailingslashit( 'glotpress/' . $pattern ), array(
+				$this->router->match( $http_method, untrailingslashit( GLOTPRESS_URL_BASE . '/' . $pattern ), array(
 					new $class_name,
 					$method_name
 				) );
