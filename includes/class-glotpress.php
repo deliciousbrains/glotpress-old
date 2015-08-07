@@ -108,6 +108,10 @@ class GlotPress {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-glotpress-i18n.php';
 
 		/**
+		 * The class responsible for processing routes.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-glotpress-router.php';
+
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-glotpress-admin.php';
